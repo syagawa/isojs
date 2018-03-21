@@ -1,8 +1,13 @@
+'use strict';
 'user strict';
 
-var Hapi = require('hapi');
+var _hapi = require('hapi');
 
-var server = Hapi.Server({
+var _hapi2 = _interopRequireDefault(_hapi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var server = _hapi2.default.Server({
   host: "localhost",
   port: 8000
 });
@@ -10,7 +15,7 @@ var server = Hapi.Server({
 server.route({
   method: "GET",
   path: "/hello",
-  handler: function(request, reply){
+  handler: function handler(request, reply) {
     return "hello world dayo";
   }
 });
