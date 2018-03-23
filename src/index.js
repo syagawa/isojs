@@ -1,6 +1,9 @@
 'user strict';
 
 import Hapi from 'hapi';
+import nunjucks from 'nunjucks';
+
+nunjucks.configure('./dist');
 
 const server = Hapi.Server({
   host: "localhost",
@@ -11,7 +14,16 @@ server.route({
   method: "GET",
   path: "/hello",
   handler: function(request, reply){
-    return "hello world dayo da";
+    nunjucks.render(
+      'index.html',
+      {
+        fname: 'Rick',
+        lname: 'Sanchez'
+      },
+      function(err, html){
+        reply(html);
+      }
+    );
   }
 });
 
@@ -28,5 +40,6 @@ server.route({
 // }
 
 // start();
+
 
 server.start();
