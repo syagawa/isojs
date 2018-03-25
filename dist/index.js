@@ -22,28 +22,46 @@ server.route({
   method: "GET",
   path: "/hello",
   handler: function handler(request, reply) {
-    _nunjucks2.default.render('index.html', {
+    return _nunjucks2.default.render('index.html', {
       fname: 'Rick',
       lname: 'Sanchez'
-    }, function (err, html) {
-      reply(html);
+      // function(err, html){
+      //   // console.info(this);
+      //   // console.info(reply);
+      //   // console.info(reply.length);
+      //   // console.info(html);
+      //   // reply.response(html);
+      //   // return html;
+      //   // console.info(reply.file);
+      //   // reply(html);
+      //   // return html;
+      //   // reply.view(html);
+      //   // return reply;
+      //   // return reply.context;
+      //   console.log(reply);
+      //   // console.log(reply.authenticated);
+      //   // console.log(reply.response);
+      //   // console.log(reply.entity);
+      //   // console.log(reply.request);
+      //   // reply.authenticated(html);
+      //   reply.response(html);
+      // }
     });
   }
 });
 
-// async function start(){
+async function start() {
 
-//   try{
-//     await server.start();
-//   }catch(err){
-//     console.log(err);
-//     process.exit(1);
-//   }
+  try {
+    await server.start();
+  } catch (err) {
+    console.log(err);
+    process.exit(1);
+  }
 
-//   console.log("Server running at: ", server.info.uri);
-// }
+  console.log("Server running at: ", server.info.uri);
+}
 
-// start();
+start();
 
-
-server.start();
+// server.start();
