@@ -10,37 +10,27 @@ const server = Hapi.Server({
   port: 8000
 });
 
+function getName(request){
+  let name = {
+    fname: "Rick",
+    lname: "Sanchez"
+  };
+
+  let nameParts = request.params.name ? request.params.name.split('/') : [];
+
+  name.fname = (nameParts[0] || request.query.fname) || name.fname;
+  name.lname = (nameParts[1] || request.query.lname) || name.lname;
+
+  return name;
+};
+
 server.route({
   method: "GET",
-  path: "/hello",
+  path: "/hello/{name*}",
   handler: function(request, reply){
     return nunjucks.render(
       'index.html',
-      {
-        fname: 'Rick',
-        lname: 'Sanchez'
-      }
-      // function(err, html){
-      //   // console.info(this);
-      //   // console.info(reply);
-      //   // console.info(reply.length);
-      //   // console.info(html);
-      //   // reply.response(html);
-      //   // return html;
-      //   // console.info(reply.file);
-      //   // reply(html);
-      //   // return html;
-      //   // reply.view(html);
-      //   // return reply;
-      //   // return reply.context;
-      //   console.log(reply);
-      //   // console.log(reply.authenticated);
-      //   // console.log(reply.response);
-      //   // console.log(reply.entity);
-      //   // console.log(reply.request);
-      //   // reply.authenticated(html);
-      //   reply.response(html);
-      // }
+      getName(request)
     );
   }
 });
