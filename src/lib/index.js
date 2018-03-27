@@ -44,3 +44,31 @@ export default class Application{
     this.server.start();
   }
 }
+
+// const handler = function (request, h) {
+
+//     return this.message;    // Or h.context.message
+// };
+
+// exports.plugin = {
+//     name: 'example',
+//     register: function (server, options) {
+
+//         const bind = {
+//             message: 'hello'
+//         };
+
+//         server.bind(bind);
+//         server.route({ method: 'GET', path: '/', handler });
+//     }
+// };
+
+// const Hapi = require('hapi');
+// const server = Hapi.server({ port: 80 });
+
+// const handler = function (request, h) {
+
+//     return h.response('The page was not found').code(404);
+// };
+
+// server.route({ method: '*', path: '/{p*}', handler });
