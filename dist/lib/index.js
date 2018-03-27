@@ -36,8 +36,10 @@ var Application = function () {
             query: request.query,
             params: request.params
           });
+          console.info(controller);
 
           controller.index(_this, request, reply, function (err) {
+            // console.info(request,reply);
             if (err) {
               return reply(err);
             }
@@ -47,11 +49,26 @@ var Application = function () {
                 return reply(err);
               }
 
-              reply(html);
+              // reply(html);
+
+              // console.info("this");
+              // console.info(this);
+              // console.info("err");
+              // console.info(err);
+              // console.info("html");
+              // console.info(html);
+              // console.info("request");
+              // console.info(request);
+              // console.info("reply");
+              // console.info(reply);
+
+              // console.info(reply.context);
+              // reply.response(html);
+              // html;
+
+              return html;
             });
           });
-
-          return controller.index;
         }
       });
     }
@@ -64,5 +81,34 @@ var Application = function () {
 
   return Application;
 }();
+
+// const handler = function (request, h) {
+
+//     return this.message;    // Or h.context.message
+// };
+
+// exports.plugin = {
+//     name: 'example',
+//     register: function (server, options) {
+
+//         const bind = {
+//             message: 'hello'
+//         };
+
+//         server.bind(bind);
+//         server.route({ method: 'GET', path: '/', handler });
+//     }
+// };
+
+// const Hapi = require('hapi');
+// const server = Hapi.server({ port: 80 });
+
+// const handler = function (request, h) {
+
+//     return h.response('The page was not found').code(404);
+// };
+
+// server.route({ method: '*', path: '/{p*}', handler });
+
 
 exports.default = Application;

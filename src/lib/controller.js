@@ -4,6 +4,15 @@ export default class Controller{
   }
 
   index(application, request, reply, callback){
+    console.info("application");
+    console.info(application);
+    console.info("request");
+    console.info(request);
+    console.info("reply");
+    console.info(reply);
+    console.info("callback");
+    console.info(callback);
+
     callback(null);
   }
 

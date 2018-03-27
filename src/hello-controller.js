@@ -22,13 +22,13 @@ export default class HelloController extends Controller {
   toString(callback){
     return nunjucks.render(
       'index.html',
-      getName(this.context)
-      ,
+      getName(this.context),
       (err, html) => {
         if(err){
           return callback(err, null);
         }
-        callback(null, null);
+        // console.info(html);
+        callback(null, html);
       }
     );
   }

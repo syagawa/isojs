@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -16,12 +16,21 @@ var Controller = function () {
   }
 
   _createClass(Controller, [{
-    key: 'index',
+    key: "index",
     value: function index(application, request, reply, callback) {
+      console.info("application");
+      console.info(application);
+      console.info("request");
+      console.info(request);
+      console.info("reply");
+      console.info(reply);
+      console.info("callback");
+      console.info(callback);
+
       callback(null);
     }
   }, {
-    key: 'toString',
+    key: "toString",
     value: function toString(callback) {
       callback(null, '成功');
     }
