@@ -22,6 +22,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+console.info("@hello-controller.js");
+
 _nunjucks2.default.configure('./dist');
 
 function getName(request) {
@@ -34,6 +36,8 @@ function getName(request) {
 
   name.fname = nameParts[0] || request.query.fname || name.fname;
   name.lname = nameParts[1] || request.query.lname || name.lname;
+
+  console.info("@hello-controller.js in getName()");
 
   return name;
 };
@@ -50,6 +54,7 @@ var HelloController = function (_Controller) {
   _createClass(HelloController, [{
     key: 'toString',
     value: function toString(callback) {
+      console.info("@hello-controller.js in HelloController Class");
       return _nunjucks2.default.render('index.html', getName(this.context), function (err, html) {
         if (err) {
           return callback(err, null);

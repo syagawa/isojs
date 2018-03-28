@@ -5,6 +5,8 @@ import Application from './lib';
 
 import HelloController from './hello-controller';
 
+console.info("@index.js");
+
 const server = new Hapi.Server();
 server.connection({
   host: "localhost",

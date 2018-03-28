@@ -1,6 +1,8 @@
 import Controller from './lib/controller';
 import nunjucks from 'nunjucks';
 
+console.info("@hello-controller.js");
+
 nunjucks.configure('./dist');
 
 function getName(request){
@@ -14,12 +16,15 @@ function getName(request){
   name.fname = (nameParts[0] || request.query.fname) || name.fname;
   name.lname = (nameParts[1] || request.query.lname) || name.lname;
 
+  console.info("@hello-controller.js in getName()");
+
   return name;
 };
 
 
 export default class HelloController extends Controller {
   toString(callback){
+    console.info("@hello-controller.js in HelloController Class");
     return nunjucks.render(
       'index.html',
       getName(this.context),

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -14,17 +14,19 @@ var Application = function () {
 
     this.server = options.server;
     this.registerRoutes(routes);
+    console.info("@lib/index.js Application Class constructor");
   }
 
   _createClass(Application, [{
-    key: 'registerRoutes',
+    key: "registerRoutes",
     value: function registerRoutes(routes) {
       for (var path in routes) {
         this.addRoute(path, routes[path]);
       }
+      console.info("@lib/index.js Application Class registerRoute");
     }
   }, {
-    key: 'addRoute',
+    key: "addRoute",
     value: function addRoute(path, Controller) {
       var _this = this;
 
@@ -47,13 +49,16 @@ var Application = function () {
               reply(html);
             });
           });
+          console.info("@lib/index.js Application Class addRoute2");
         }
       });
+      console.info("@lib/index.js Application Class addRoute1");
     }
   }, {
-    key: 'start',
+    key: "start",
     value: function start() {
       this.server.start();
+      console.info("@lib/index.js Application Class start");
     }
   }]);
 

@@ -2,12 +2,14 @@ export default class Application{
   constructor(routes, options){
     this.server = options.server;
     this.registerRoutes(routes);
+    console.info("@lib/index.js Application Class constructor");
   }
 
   registerRoutes(routes){
     for(let path in routes){
       this.addRoute(path, routes[path]);
     }
+    console.info("@lib/index.js Application Class registerRoute");
   }
 
   addRoute(path, Controller){
@@ -30,13 +32,14 @@ export default class Application{
             reply(html);
           });
         });
-
-
+        console.info("@lib/index.js Application Class addRoute2");
       }
     });
+    console.info("@lib/index.js Application Class addRoute1");
   }
 
   start(){
     this.server.start();
+    console.info("@lib/index.js Application Class start");
   }
 }

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -13,17 +13,20 @@ var Controller = function () {
     _classCallCheck(this, Controller);
 
     this.context = context;
+    console.info("@lib/index.js Controller Class constructor");
   }
 
   _createClass(Controller, [{
-    key: 'index',
+    key: "index",
     value: function index(application, request, reply, callback) {
       callback(null);
+      console.info("@lib/index.js Controller Class callback");
     }
   }, {
-    key: 'toString',
+    key: "toString",
     value: function toString(callback) {
       callback(null, '成功');
+      console.info("@lib/index.js Controller Class callback");
     }
   }]);
 

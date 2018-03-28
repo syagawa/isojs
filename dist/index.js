@@ -15,6 +15,8 @@ var _helloController2 = _interopRequireDefault(_helloController);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+console.info("@index.js");
+
 var server = new _hapi2.default.Server();
 server.connection({
   host: "localhost",
