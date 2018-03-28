@@ -27,7 +27,6 @@ export default class HelloController extends Controller {
         if(err){
           return callback(err, null);
         }
-        // console.info(html);
         callback(null, html);
       }
     );

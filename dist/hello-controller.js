@@ -54,7 +54,6 @@ var HelloController = function (_Controller) {
         if (err) {
           return callback(err, null);
         }
-        // console.info(html);
         callback(null, html);
       });
     }
