@@ -19,7 +19,7 @@
     "run-sequence": "^2.2.1"
   },
   "dependencies": {
-    "hapi": "^17.2.3",
+    "hapi": "^16.6.3",
     "nunjucks": "^3.1.2"
   }
 }

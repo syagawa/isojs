@@ -1,7 +1,9 @@
 export default class Application{
   constructor(routes, options){
     this.server = options.server;
+    console.info("koko1");
     this.registerRoutes(routes);
+    console.info("koko2");
   }
 
   registerRoutes(routes){

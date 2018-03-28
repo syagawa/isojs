@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -13,18 +13,20 @@ var Application = function () {
     _classCallCheck(this, Application);
 
     this.server = options.server;
+    console.info("koko1");
     this.registerRoutes(routes);
+    console.info("koko2");
   }
 
   _createClass(Application, [{
-    key: 'registerRoutes',
+    key: "registerRoutes",
     value: function registerRoutes(routes) {
       for (var path in routes) {
         this.addRoute(path, routes[path]);
       }
     }
   }, {
-    key: 'addRoute',
+    key: "addRoute",
     value: function addRoute(path, Controller) {
       var _this = this;
 
@@ -73,7 +75,7 @@ var Application = function () {
       });
     }
   }, {
-    key: 'start',
+    key: "start",
     value: function start() {
       this.server.start();
     }
