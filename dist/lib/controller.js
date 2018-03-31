@@ -20,13 +20,13 @@ var Controller = function () {
     key: "index",
     value: function index(application, request, reply, callback) {
       callback(null);
-      console.info("@lib/index.js Controller Class callback");
+      console.info("@lib/index.js Controller Class index");
     }
   }, {
     key: "toString",
     value: function toString(callback) {
       callback(null, '成功');
-      console.info("@lib/index.js Controller Class callback");
+      console.info("@lib/index.js Controller Class toString");
     }
   }]);
 

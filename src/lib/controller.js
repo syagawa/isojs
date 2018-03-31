@@ -6,11 +6,11 @@ export default class Controller{
 
   index(application, request, reply, callback){
     callback(null);
-    console.info("@lib/index.js Controller Class callback");
+    console.info("@lib/index.js Controller Class index");
   }
 
   toString(callback){
     callback(null, '成功');
-    console.info("@lib/index.js Controller Class callback");
+    console.info("@lib/index.js Controller Class toString");
   }
 }
