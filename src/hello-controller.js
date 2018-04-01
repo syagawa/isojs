@@ -25,8 +25,8 @@ function getName(request){
 export default class HelloController extends Controller {
   toString(callback){
     console.info("@hello-controller.js in HelloController Class");
-    return nunjucks.render(
-      'index.html',
+    nunjucks.renderString(
+      '<p>こんにちは、{{fname}} {{lname}}</p>',
       getName(this.context),
       (err, html) => {
         if(err){

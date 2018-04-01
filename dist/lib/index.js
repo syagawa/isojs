@@ -13,6 +13,7 @@ var Application = function () {
     _classCallCheck(this, Application);
 
     this.server = options.server;
+    this.document = options.document;
     this.registerRoutes(routes);
     console.info("@lib/index.js Application Class constructor");
   }
@@ -46,7 +47,12 @@ var Application = function () {
               if (err) {
                 return reply(err);
               }
-              reply(html);
+              _this.document(_this, controller, request, reply, html, function (err, html) {
+                if (err) {
+                  return reply(err);
+                }
+                reply(html);
+              });
             });
           });
           console.info("@lib/index.js Application Class addRoute2");

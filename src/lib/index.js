@@ -1,6 +1,7 @@
 export default class Application{
   constructor(routes, options){
     this.server = options.server;
+    this.document = options.document;
     this.registerRoutes(routes);
     console.info("@lib/index.js Application Class constructor");
   }
@@ -29,7 +30,19 @@ export default class Application{
             if(err){
               return reply(err);
             }
-            reply(html);
+            this.document(
+              this,
+              controller,
+              request,
+              reply,
+              html,
+              function(err, html){
+                if(err){
+                  return reply(err);
+                }
+                reply(html);
+              }
+            );
           });
         });
         console.info("@lib/index.js Application Class addRoute2");

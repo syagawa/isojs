@@ -5,7 +5,11 @@ import Application from './lib';
 
 import HelloController from './hello-controller';
 
+import nunjucks from 'nunjucks';
+
 console.info("@index.js");
+
+nunjucks.configure('./dist');
 
 const server = new Hapi.Server();
 server.connection({
@@ -18,7 +22,19 @@ const application = new Application(
     '/hello/{name*}': HelloController
   },
   {
-    server: server
+    server: server,
+    document: function(application, controller, request, reply, body, callback){
+      return nunjucks.render(
+        './index.html',
+         { body: body },
+         (err, html) => {
+           if(err){
+             return callback(err, null);
+           }
+           callback(null, html);
+         }
+      );
+    }
   }
 );
 
