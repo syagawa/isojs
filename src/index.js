@@ -11,6 +11,8 @@ console.info("@index.js");
 
 nunjucks.configure('./dist');
 
+const APP_FILE_PATH = '/application.js';
+
 const server = new Hapi.Server();
 server.connection({
   host: "localhost",
@@ -26,7 +28,10 @@ const application = new Application(
     document: function(application, controller, request, reply, body, callback){
       return nunjucks.render(
         './index.html',
-         { body: body },
+         {
+           body: body,
+           path: APP_FILE_PATH
+         },
          (err, html) => {
            if(err){
              return callback(err, null);
@@ -37,5 +42,13 @@ const application = new Application(
     }
   }
 );
+
+server.route({
+  method: 'GET',
+  path: APP_FILE_PATH,
+  handler: (request, reply) => {
+    reply.file('dist/build/application.js');
+  }
+});
 
 application.start();

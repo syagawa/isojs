@@ -23,6 +23,8 @@ console.info("@index.js");
 
 _nunjucks2.default.configure('./dist');
 
+var APP_FILE_PATH = '/application.js';
+
 var server = new _hapi2.default.Server();
 server.connection({
   host: "localhost",
@@ -34,12 +36,23 @@ var application = new _lib2.default({
 }, {
   server: server,
   document: function document(application, controller, request, reply, body, callback) {
-    return _nunjucks2.default.render('./index.html', { body: body }, function (err, html) {
+    return _nunjucks2.default.render('./index.html', {
+      body: body,
+      path: APP_FILE_PATH
+    }, function (err, html) {
       if (err) {
         return callback(err, null);
       }
       callback(null, html);
     });
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: APP_FILE_PATH,
+  handler: function handler(request, reply) {
+    reply.file('dist/build/application.js');
   }
 });
 
