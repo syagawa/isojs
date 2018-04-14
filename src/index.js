@@ -7,7 +7,7 @@ import HelloController from './hello-controller';
 
 import nunjucks from 'nunjucks';
 
-console.info("@index.js");
+console.info("@index.js 1");
 
 nunjucks.configure('./dist');
 
@@ -26,6 +26,8 @@ const application = new Application(
   {
     server: server,
     document: function(application, controller, request, reply, body, callback){
+
+      console.info("@index.js in application document", APP_FILE_PATH);
       return nunjucks.render(
         './index.html',
          {
@@ -47,8 +49,13 @@ server.route({
   method: 'GET',
   path: APP_FILE_PATH,
   handler: (request, reply) => {
-    reply.file('dist/build/application.js');
+    console.info('@index.js in server route handler');
+    return reply.file('dist/build/application.js');
   }
+
 });
+
+console.info("@index.js 2");
+debugger;
 
 application.start();
