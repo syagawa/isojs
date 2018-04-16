@@ -55,12 +55,13 @@ server.route({
   path: APP_FILE_PATH,
   handler: function handler(request, reply) {
     console.info('@index.js in server route handler');
-    return reply.file('dist/build/application.js');
+    // reply.file('dist/build/application.js');
+    return 'dist/build/application.js';
   }
 
 });
 
 console.info("@index.js 2");
-debugger;
+// debugger;
 
 application.start();
