@@ -1,4 +1,4 @@
-'user strict';
+'use strict';
 
 import Hapi from 'hapi';
 import Application from './lib';
@@ -19,6 +19,17 @@ server.connection({
   port: 8000
 });
 
+server.route({
+  method: 'GET',
+  path: APP_FILE_PATH,
+  handler: (request, reply) => {
+    console.info('@index.js in server route handler');
+    reply.file('dist/build/application.js');
+    // return 'dist/build/application.js';
+  }
+
+});
+
 const application = new Application(
   {
     '/hello/{name*}': HelloController
@@ -32,7 +43,7 @@ const application = new Application(
         './index.html',
          {
            body: body,
-           path: APP_FILE_PATH
+           application: APP_FILE_PATH
          },
          (err, html) => {
            if(err){
@@ -45,16 +56,7 @@ const application = new Application(
   }
 );
 
-server.route({
-  method: 'GET',
-  path: APP_FILE_PATH,
-  handler: (request, reply) => {
-    console.info('@index.js in server route handler');
-    // reply.file('dist/build/application.js');
-    return 'dist/build/application.js';
-  }
 
-});
 
 console.info("@index.js 2");
 // debugger;

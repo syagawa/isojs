@@ -1,5 +1,4 @@
 'use strict';
-'user strict';
 
 var _hapi = require('hapi');
 
@@ -31,6 +30,17 @@ server.connection({
   port: 8000
 });
 
+server.route({
+  method: 'GET',
+  path: APP_FILE_PATH,
+  handler: function handler(request, reply) {
+    console.info('@index.js in server route handler');
+    reply.file('dist/build/application.js');
+    // return 'dist/build/application.js';
+  }
+
+});
+
 var application = new _lib2.default({
   '/hello/{name*}': _helloController2.default
 }, {
@@ -40,7 +50,7 @@ var application = new _lib2.default({
     console.info("@index.js in application document", APP_FILE_PATH);
     return _nunjucks2.default.render('./index.html', {
       body: body,
-      path: APP_FILE_PATH
+      application: APP_FILE_PATH
     }, function (err, html) {
       if (err) {
         return callback(err, null);
@@ -48,17 +58,6 @@ var application = new _lib2.default({
       callback(null, html);
     });
   }
-});
-
-server.route({
-  method: 'GET',
-  path: APP_FILE_PATH,
-  handler: function handler(request, reply) {
-    console.info('@index.js in server route handler');
-    // reply.file('dist/build/application.js');
-    return 'dist/build/application.js';
-  }
-
 });
 
 console.info("@index.js 2");
