@@ -24,9 +24,21 @@ server.route({
   path: APP_FILE_PATH,
   handler: (request, reply) => {
     console.info('@index.js in server route handler');
-    reply.file('dist/build/application.js');
+    // reply.file('dist/build/application.js');
     // return 'dist/build/application.js';
+    reply.file('/dist/build/application.js');
   }
+  // handler: {
+  //   file: 'dist/build/application.js'
+  // }
+  // handler: {
+  //   file: {
+  //     path: APP_FILE_PATH,
+  //     filename: 'dist/build/application.js', // override the filename in the Content-Disposition header
+  //     mode: 'attachment', // specify the Content-Disposition is an attachment
+  //     lookupCompressed: true // allow looking for script.js.gz if the request allows it
+  //   }
+  // }
 
 });
 
