@@ -16,6 +16,10 @@ var _nunjucks = require('nunjucks');
 
 var _nunjucks2 = _interopRequireDefault(_nunjucks);
 
+var _inert = require('inert');
+
+var _inert2 = _interopRequireDefault(_inert);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 console.info("@index.js 1");
@@ -29,6 +33,8 @@ server.connection({
   host: "localhost",
   port: 8000
 });
+
+server.register(_inert2.default, function () {});
 
 var application = new _lib2.default({
   '/hello/{name*}': _helloController2.default
@@ -56,32 +62,31 @@ console.info("@index.js 2");
 server.route({
   method: 'GET',
   path: APP_FILE_PATH,
-  handler: function handler(request, reply) {
-    console.info('@index.js in server route handler');
-    console.info("request__", request);
-    console.info("reply__", reply);
-    console.info("this", undefined);
-    console.info('server', server);
-    // reply.file('dist/build/application.js');
-    // return 'dist/build/application.js';
-    reply('./build/application.js');
-    // return './build/application.js';
-    // reply.redirect('build/application.js');
-    // return './build/application.js';
-    // reply('');
-  }
-  // handler: {
-  //   file: 'dist/build/application.js'
-  // }
-  // handler: {
-  //   file: {
-  //     path: APP_FILE_PATH,
-  //     filename: 'dist/build/application.js', // override the filename in the Content-Disposition header
-  //     mode: 'attachment', // specify the Content-Disposition is an attachment
-  //     lookupCompressed: true // allow looking for script.js.gz if the request allows it
-  //   }
-  // }
+  // handler: (request, reply) => {
+  //   console.info('@index.js in server route handler');
+  //   console.info("request__", request);
+  //   console.info("reply__", reply);
+  //   console.info("this", this);
+  //   console.info('server', server);
+  //   // reply.file('dist/build/application.js');
+  //   // return 'dist/build/application.js';
+  //   // return './build/application.js';
+  //   // reply.redirect('build/application.js');
+  //   // return './build/application.js';
+  //   // reply('');
 
-});
+  // }
+  handler: {
+    file: 'dist/build/application.js'
+    // handler: {
+    //   file: {
+    //     path: APP_FILE_PATH,
+    //     filename: 'dist/build/application.js', // override the filename in the Content-Disposition header
+    //     mode: 'attachment', // specify the Content-Disposition is an attachment
+    //     lookupCompressed: true // allow looking for script.js.gz if the request allows it
+    //   }
+    // }
+
+  } });
 
 application.start();
