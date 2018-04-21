@@ -55,7 +55,7 @@ var HelloController = function (_Controller) {
     key: 'toString',
     value: function toString(callback) {
       console.info("@hello-controller.js in HelloController Class");
-      _nunjucks2.default.renderString('<p>こんにちは、{{fname}} {{lname}}</p>', getName(this.context), function (err, html) {
+      return _nunjucks2.default.render('hello.html', getName(this.context), function (err, html) {
         if (err) {
           return callback(err, null);
         }

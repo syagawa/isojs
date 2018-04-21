@@ -56,37 +56,13 @@ var application = new _lib2.default({
 });
 
 console.info("@index.js 2");
-// debugger;
-
 
 server.route({
   method: 'GET',
   path: APP_FILE_PATH,
-  // handler: (request, reply) => {
-  //   console.info('@index.js in server route handler');
-  //   console.info("request__", request);
-  //   console.info("reply__", reply);
-  //   console.info("this", this);
-  //   console.info('server', server);
-  //   // reply.file('dist/build/application.js');
-  //   // return 'dist/build/application.js';
-  //   // return './build/application.js';
-  //   // reply.redirect('build/application.js');
-  //   // return './build/application.js';
-  //   // reply('');
-
-  // }
   handler: {
     file: 'dist/build/application.js'
-    // handler: {
-    //   file: {
-    //     path: APP_FILE_PATH,
-    //     filename: 'dist/build/application.js', // override the filename in the Content-Disposition header
-    //     mode: 'attachment', // specify the Content-Disposition is an attachment
-    //     lookupCompressed: true // allow looking for script.js.gz if the request allows it
-    //   }
-    // }
-
-  } });
+  }
+});
 
 application.start();
