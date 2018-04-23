@@ -11,7 +11,10 @@ import Inert from 'inert';
 
 console.info("@index.js 1");
 
-nunjucks.configure('./dist');
+nunjucks.configure(
+  './dist',
+  { autoescape: false }
+);
 
 const APP_FILE_PATH = '/application.js';
 

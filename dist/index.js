@@ -24,7 +24,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 console.info("@index.js 1");
 
-_nunjucks2.default.configure('./dist');
+_nunjucks2.default.configure('./dist', { autoescape: false });
 
 var APP_FILE_PATH = '/application.js';
 
