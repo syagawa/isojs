@@ -28,6 +28,18 @@ var Controller = function () {
       callback(null, '成功');
       console.info("@lib/index.js Controller Class toString");
     }
+  }, {
+    key: "render",
+    value: function render(target, callbacj) {
+      this.toString(function (err, body) {
+        if (err) {
+          return callback(err, null);
+        }
+
+        document.querySelector(target).innerHTML = body;
+        callback(null, bory);
+      });
+    }
   }]);
 
   return Controller;
