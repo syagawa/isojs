@@ -16,6 +16,10 @@ var _nunjucks = require('nunjucks');
 
 var _nunjucks2 = _interopRequireDefault(_nunjucks);
 
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
 var _inert = require('inert');
 
 var _inert2 = _interopRequireDefault(_inert);
@@ -56,6 +60,16 @@ var application = new _lib2.default({
 });
 
 console.info("@index.js 2");
+
+server.route({
+  method: 'GET',
+  path: '/templates/{template*}',
+  handler: {
+    file: function file(request) {
+      return _path2.default.join('dist', request.params.template);
+    }
+  }
+});
 
 server.route({
   method: 'GET',

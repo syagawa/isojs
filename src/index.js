@@ -6,6 +6,8 @@ import Application from './lib';
 import HelloController from './hello-controller';
 
 import nunjucks from 'nunjucks';
+import path from 'path';
+
 
 import Inert from 'inert';
 
@@ -53,6 +55,16 @@ const application = new Application(
 );
 
 console.info("@index.js 2");
+
+server.route({
+  method: 'GET',
+  path: '/templates/{template*}',
+  handler: {
+    file: (request) => {
+      return path.join('dist', request.params.template);
+    }
+  }
+});
 
 server.route({
   method: 'GET',
