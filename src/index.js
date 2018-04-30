@@ -28,6 +28,24 @@ server.connection({
 
 server.register(Inert, () => {});
 
+server.route({
+  method: 'GET',
+  path: APP_FILE_PATH,
+  handler: (request, reply) => {
+    reply.file('dist/build/application.js');
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/templates/{template*}',
+  handler: {
+    file: (request) => {
+      return path.join('dist', request.params.template);
+    }
+  }
+});
+
 const application = new Application(
   {
     '/hello/{name*}': HelloController
@@ -55,24 +73,5 @@ const application = new Application(
 );
 
 console.info("@index.js 2");
-
-server.route({
-  method: 'GET',
-  path: '/templates/{template*}',
-  handler: {
-    file: (request) => {
-      return path.join('dist', request.params.template);
-    }
-  }
-});
-
-server.route({
-  method: 'GET',
-  path: APP_FILE_PATH,
-  handler: {
-    file: 'dist/build/application.js'
-  }
-});
-
 
 application.start();

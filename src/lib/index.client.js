@@ -63,7 +63,7 @@ export default class Application {
   start(){
     this.poStateListener = window.addEventListener('popstate', (e) => {
       let {pathname, search} = window.location;
-      let url = '${pathname}${search}';
+      let url = `${pathname}${search}`;
       this.navigate(url, false);
     });
     this.clickListener = document.addEventListener('click', (e) => {

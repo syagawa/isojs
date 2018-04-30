@@ -99,7 +99,7 @@ var Application = function () {
             pathname = _window$location.pathname,
             search = _window$location.search;
 
-        var url = '${pathname}${search}';
+        var url = '' + pathname + search;
         _this.navigate(url, false);
       });
       this.clickListener = document.addEventListener('click', function (e) {

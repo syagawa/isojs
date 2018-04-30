@@ -40,6 +40,24 @@ server.connection({
 
 server.register(_inert2.default, function () {});
 
+server.route({
+  method: 'GET',
+  path: APP_FILE_PATH,
+  handler: function handler(request, reply) {
+    reply.file('dist/build/application.js');
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/templates/{template*}',
+  handler: {
+    file: function file(request) {
+      return _path2.default.join('dist', request.params.template);
+    }
+  }
+});
+
 var application = new _lib2.default({
   '/hello/{name*}': _helloController2.default
 }, {
@@ -60,23 +78,5 @@ var application = new _lib2.default({
 });
 
 console.info("@index.js 2");
-
-server.route({
-  method: 'GET',
-  path: '/templates/{template*}',
-  handler: {
-    file: function file(request) {
-      return _path2.default.join('dist', request.params.template);
-    }
-  }
-});
-
-server.route({
-  method: 'GET',
-  path: APP_FILE_PATH,
-  handler: {
-    file: 'dist/build/application.js'
-  }
-});
 
 application.start();
