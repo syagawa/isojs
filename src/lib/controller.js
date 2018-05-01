@@ -14,14 +14,18 @@ export default class Controller{
     console.info("@lib/index.js Controller Class toString");
   }
 
-  render(target, callbacj){
+  render(target, callback){
+    console.info("@lib/index.js Controller Class render");
     this.toString(function(err, body){
       if(err){
         return callback(err, null);
       }
 
+      console.info("@lib/index.js Controller Class render toString");
+      console.info(body);
+
       document.querySelector(target).innerHTML = body;
-      callback(null, bory);
+      callback(null, body);
 
     });
   }

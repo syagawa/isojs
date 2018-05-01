@@ -44,8 +44,12 @@ var Application = function () {
   }, {
     key: 'navigate',
     value: function navigate(url) {
+      var _this = this;
+
       var push = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
+
+      console.info("@lib/index.client.js Application Class navigate");
 
       if (!history.pushState) {
         window.location = url;
@@ -80,6 +84,15 @@ var Application = function () {
           if (err) {
             return reply(err);
           }
+
+          console.info("@lib/index.client.js Application Class navigate controller.index");
+          controller.render(_this.options.target, function (err, response) {
+            if (err) {
+              return reply(err);
+            }
+
+            reply(response);
+          });
         });
       }
 
@@ -92,7 +105,7 @@ var Application = function () {
   }, {
     key: 'start',
     value: function start() {
-      var _this = this;
+      var _this2 = this;
 
       this.poStateListener = window.addEventListener('popstate', function (e) {
         var _window$location = window.location,
@@ -100,7 +113,7 @@ var Application = function () {
             search = _window$location.search;
 
         var url = '' + pathname + search;
-        _this.navigate(url, false);
+        _this2.navigate(url, false);
       });
       this.clickListener = document.addEventListener('click', function (e) {
         var target = e.target;
@@ -113,7 +126,7 @@ var Application = function () {
             e.preventDefault();
           }
 
-          _this.navigate(identifier || href);
+          _this2.navigate(identifier || href);
         }
       });
     }

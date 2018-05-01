@@ -30,14 +30,18 @@ var Controller = function () {
     }
   }, {
     key: "render",
-    value: function render(target, callbacj) {
+    value: function render(target, callback) {
+      console.info("@lib/index.js Controller Class render");
       this.toString(function (err, body) {
         if (err) {
           return callback(err, null);
         }
 
+        console.info("@lib/index.js Controller Class render toString");
+        console.info(body);
+
         document.querySelector(target).innerHTML = body;
-        callback(null, bory);
+        callback(null, body);
       });
     }
   }]);

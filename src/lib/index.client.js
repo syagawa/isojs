@@ -21,6 +21,9 @@ export default class Application {
 
   navigate(url, push=true){
 
+    console.info("@lib/index.client.js Application Class navigate");
+
+
     if(!history.pushState){
       window.location = url;
       return;
@@ -48,6 +51,17 @@ export default class Application {
         if(err){
           return reply(err);
         }
+
+        console.info("@lib/index.client.js Application Class navigate controller.index");
+        controller.render(this.options.target, (err, response) => {
+          if(err){
+            return reply(err);
+          }
+
+          reply(response);
+
+        })
+
       });
 
     }
