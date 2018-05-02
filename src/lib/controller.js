@@ -21,8 +21,7 @@ export default class Controller{
         return callback(err, null);
       }
 
-      console.info("@lib/index.js Controller Class render toString");
-      console.info(body);
+      console.info("@lib/index.js Controller Class render toString callback", body);
 
       document.querySelector(target).innerHTML = body;
       callback(null, body);

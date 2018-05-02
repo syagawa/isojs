@@ -28,7 +28,7 @@
     "query-string": "^6.0.0"
   },
   "browser": {
-    "./src/index.js": "./src/index.client.js",
+    "./src/options.js": "./src/options.client.js",
     "./src/lib/index.js": "./src/lib/index.client.js"
   }
 }
