@@ -1,3 +1,5 @@
+console.info("@lib/index.js");
+
 export default class Application{
   constructor(routes, options){
     this.server = options.server;
@@ -18,15 +20,19 @@ export default class Application{
       path: path,
       method: 'GET',
       handler: (request, reply) => {
+        console.info("@lib/index.js Application Class addRoute handler1");
         const controller = new Controller({
           query: request.query,
           params: request.params
         });
         controller.index(this, request, reply, (err) => {
+          console.info("@lib/index.js Application Class addRoute handler controller.index");
+
           if(err){
             return reply(err);
           }
           controller.toString((err, html) => {
+            console.info("@lib/index.js Application Class addRoute handler controller.index toString");
             if(err){
               return reply(err);
             }
@@ -37,6 +43,7 @@ export default class Application{
               reply,
               html,
               function(err, html){
+                console.info("@lib/index.js Application Class addRoute handler controller.index toString document callback");
                 if(err){
                   return reply(err);
                 }
@@ -45,10 +52,10 @@ export default class Application{
             );
           });
         });
-        console.info("@lib/index.js Application Class addRoute2");
+        console.info("@lib/index.js Application Class addRoute handler2");
       }
     });
-    console.info("@lib/index.js Application Class addRoute1");
+    console.info("@lib/index.js Application Class addRoute");
   }
 
   start(){

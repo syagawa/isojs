@@ -1,13 +1,13 @@
 'use strict';
 
+console.info("@index.js");
+
 import Application from './lib';
 
 import HelloController from './hello-controller';
 
 import nunjucks from 'nunjucks';
 import options from './options';
-
-console.info("@index.js 1");
 
 nunjucks.configure(
   options.nunjucks.path,
@@ -21,7 +21,5 @@ const application = new Application(
   },
   options
 );
-
-console.info("@index.js 2");
 
 application.start();

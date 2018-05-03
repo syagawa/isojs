@@ -1,16 +1,21 @@
 import Call from 'call';
 import query from 'query-string';
 
+console.info("@lib/index.client.js");
+
 export default class Application {
   constructor(routes, options){
     this.routes = routes;
     this.options = options;
+
+    console.info("@lib/index.client.js Application Class constructor");
 
     this.router = new Call.Router();
     this.registerRoutes(routes);
   }
 
   registerRoutes(routes){
+    console.info("@lib/index.client.js Application Class registerRoutes");
     for(let path in routes){
       this.router.add({
         path: path,
@@ -22,7 +27,6 @@ export default class Application {
   navigate(url, push=true){
 
     console.info("@lib/index.client.js Application Class navigate");
-
 
     if(!history.pushState){
       window.location = url;
@@ -66,8 +70,6 @@ export default class Application {
 
     }
 
-    console.log(url);
-
     if(push){
       history.pushState({}, null, url);
     }
@@ -75,6 +77,7 @@ export default class Application {
   }
 
   start(){
+    console.info("@lib/index.client.js Application Class start");
     this.poStateListener = window.addEventListener('popstate', (e) => {
       let {pathname, search} = window.location;
       let url = `${pathname}${search}`;
@@ -84,6 +87,9 @@ export default class Application {
       let {target} = e;
       let identifier = target.dataset.navigate;
       let href = target.getAttribute('href');
+
+      console.info("@lib/index.client.js Application Class click");
+
 
       if(identifier !== undefined){
         if(href){

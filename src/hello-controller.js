@@ -16,15 +16,12 @@ function getName(request){
   name.fname = (nameParts[0] || request.query.fname) || name.fname;
   name.lname = (nameParts[1] || request.query.lname) || name.lname;
 
-  console.info("@hello-controller.js in getName()");
-
   return name;
 };
 
-
 export default class HelloController extends Controller {
   toString(callback){
-    console.info("@hello-controller.js in HelloController Class");
+    console.info("@hello-controller.js in HelloController Class toString");
     return nunjucks.render(
       'hello.html',
       getName(this.context),
@@ -32,6 +29,7 @@ export default class HelloController extends Controller {
         if(err){
           return callback(err, null);
         }
+        console.info("@hello-controller.js in HelloController Class toString nunjucks render");
         callback(null, html);
       }
     );

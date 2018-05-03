@@ -20,12 +20,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+console.info("@lib/index.client.js");
+
 var Application = function () {
   function Application(routes, options) {
     _classCallCheck(this, Application);
 
     this.routes = routes;
     this.options = options;
+
+    console.info("@lib/index.client.js Application Class constructor");
 
     this.router = new _call2.default.Router();
     this.registerRoutes(routes);
@@ -34,6 +38,7 @@ var Application = function () {
   _createClass(Application, [{
     key: 'registerRoutes',
     value: function registerRoutes(routes) {
+      console.info("@lib/index.client.js Application Class registerRoutes");
       for (var path in routes) {
         this.router.add({
           path: path,
@@ -96,8 +101,6 @@ var Application = function () {
         });
       }
 
-      console.log(url);
-
       if (push) {
         history.pushState({}, null, url);
       }
@@ -107,6 +110,7 @@ var Application = function () {
     value: function start() {
       var _this2 = this;
 
+      console.info("@lib/index.client.js Application Class start");
       this.poStateListener = window.addEventListener('popstate', function (e) {
         var _window$location = window.location,
             pathname = _window$location.pathname,
@@ -120,6 +124,8 @@ var Application = function () {
 
         var identifier = target.dataset.navigate;
         var href = target.getAttribute('href');
+
+        console.info("@lib/index.client.js Application Class click");
 
         if (identifier !== undefined) {
           if (href) {

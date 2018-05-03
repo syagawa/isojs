@@ -5,6 +5,8 @@ import path from 'path';
 import nunjucks from 'nunjucks';
 import Inert from 'inert';
 
+console.info("@options.js");
+
 const server = new Hapi.Server({
   debug: {
     request: ['error']
@@ -24,6 +26,7 @@ server.route({
   method: 'GET',
   path: APP_FILE_PATH,
   handler: (request, reply) => {
+    console.info("@options.js application.js handler");
     reply.file('dist/build/application.js');
   }
 });
@@ -33,6 +36,7 @@ server.route({
   path: '/templates/{template*}',
   handler: {
     file: (request) => {
+      console.info("@options.js templates handler");
       return path.join('dist', request.params.template);
     }
   }
@@ -58,6 +62,7 @@ export default {
         if(err){
           return callback(err, null);
         }
+        console.info("@options.js document nunjucks render");
         callback(null, html);
       }
     )

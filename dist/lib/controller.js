@@ -8,36 +8,38 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+console.info("@Controller.js");
+
 var Controller = function () {
   function Controller(context) {
     _classCallCheck(this, Controller);
 
     this.context = context;
-    console.info("@lib/index.js Controller Class constructor");
+    console.info("@lib/Controller.js Controller Class constructor");
   }
 
   _createClass(Controller, [{
     key: "index",
     value: function index(application, request, reply, callback) {
       callback(null);
-      console.info("@lib/index.js Controller Class index");
+      console.info("@lib/Controller.js Controller Class index");
     }
   }, {
     key: "toString",
     value: function toString(callback) {
       callback(null, '成功');
-      console.info("@lib/index.js Controller Class toString");
+      console.info("@lib/Controller.js Controller Class toString");
     }
   }, {
     key: "render",
     value: function render(target, callback) {
-      console.info("@lib/index.js Controller Class render");
+      console.info("@lib/Controller.js Controller Class render");
       this.toString(function (err, body) {
         if (err) {
           return callback(err, null);
         }
 
-        console.info("@lib/index.js Controller Class render toString callback", body);
+        console.info("@lib/Controller.js Controller Class render toString callback", body);
 
         document.querySelector(target).innerHTML = body;
         callback(null, body);
