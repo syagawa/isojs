@@ -22,7 +22,7 @@ Ctrl + C
 ## 読み込まれる順
 
 1. gulp 起動
-    * index.jを読み込み
+    * index.jsを読み込み
 
 1. index.js 初期化
     * lib/index.js をロード
@@ -47,23 +47,23 @@ Ctrl + C
         * hello-controller.js HelloController の toString 実行
     * lib/Controller.js Controller の index 実行
     * hello-controller.js HelloController nunjucks render 実行
-        * hello.htmlの描画
+        * hello.html の描画
     * options.js document nunjucks render 実行
-        * hello.htmlの結果をindex.htmlに描画して表示
+        * hello.html の結果を index.html に描画して表示
 
 1. htmlが読み込まれる
-    * application.jsを読み込み
+    * application.js を読み込み
         * options.js application.js handler 実行
 
 1. index.js クライアント側の動き
     * lib/index.client.js をロード
-        * package.jsonで読み替えを指定している
+        * package.json でlib/index.js との読み替えを指定している
     * Controller.js をロード
     * hello-controller.js をロード
     * options.client.js をロード
-        * package.jsonで読み替えを指定している
+        * package.json で読み替えを指定している
     * index.js 実行
-    * lib/index.client.js の Applicationをnew
+    * lib/index.client.js の Application を new
         * Application constructor
         * Application registerRoutes
         * Application start
@@ -79,9 +79,9 @@ Ctrl + C
         * hello-controller.js toString
         * lib/controller.js Controller index
         * hello-controller.js nunjucks render 実行
-            * hello.htmlの描画
+            * hello.html の描画
         * lib/controller.js render toString
-            * hello.htmlの結果を targetに描画
+            * hello.html の結果を target に描画
 
 
 
