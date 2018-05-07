@@ -1,6 +1,8 @@
 import Call from 'call';
 import query from 'query-string';
 
+import cookie from './cookie.client';
+
 console.info("@lib/index.client.js");
 
 export default class Application {
@@ -45,7 +47,8 @@ export default class Application {
 
       const controller = new Controller({
         query: query.parse(search),
-        params: params
+        params: params,
+        cookie: cookie
       });
 
       const request = () => {};

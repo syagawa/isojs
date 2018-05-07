@@ -50,6 +50,12 @@ var HelloController = function (_Controller) {
   }
 
   _createClass(HelloController, [{
+    key: 'index',
+    value: function index(application, request, reply, callback) {
+      this.context.cookie.set('random', '_' + (Math.floor(Math.random() * 1000) + 1), { path: '/' });
+      callback(null);
+    }
+  }, {
     key: 'toString',
     value: function toString(callback) {
       console.info("@hello-controller.js in HelloController Class toString");

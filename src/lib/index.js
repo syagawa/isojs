@@ -1,3 +1,5 @@
+import cookieFactory from './cookie';
+
 console.info("@lib/index.js");
 
 export default class Application{
@@ -23,7 +25,8 @@ export default class Application{
         console.info("@lib/index.js Application Class addRoute handler1");
         const controller = new Controller({
           query: request.query,
-          params: request.params
+          params: request.params,
+          cookie: cookieFactory(request, reply)
         });
         controller.index(this, request, reply, (err) => {
           console.info("@lib/index.js Application Class addRoute handler controller.index");

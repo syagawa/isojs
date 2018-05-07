@@ -16,6 +16,10 @@ var _queryString = require('query-string');
 
 var _queryString2 = _interopRequireDefault(_queryString);
 
+var _cookie = require('./cookie.client');
+
+var _cookie2 = _interopRequireDefault(_cookie);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -79,7 +83,8 @@ var Application = function () {
 
         var controller = new Controller({
           query: _queryString2.default.parse(search),
-          params: params
+          params: params,
+          cookie: _cookie2.default
         });
 
         var request = function request() {};
