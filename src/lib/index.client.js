@@ -2,6 +2,7 @@ import Call from 'call';
 import query from 'query-string';
 
 import cookie from './cookie.client';
+import replyFactory from './reply.client';
 
 console.info("@lib/index.client.js");
 
@@ -52,7 +53,11 @@ export default class Application {
       });
 
       const request = () => {};
-      const reply = () => {};
+      const reply = replyFactory(this);
+
+      if(push){
+        history.pushState({}, null, url);
+      }
 
       controller.index(this, request, reply, (err) => {
         if(err){
@@ -71,10 +76,6 @@ export default class Application {
 
       });
 
-    }
-
-    if(push){
-      history.pushState({}, null, url);
     }
 
   }

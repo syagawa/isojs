@@ -20,6 +20,10 @@ var _cookie = require('./cookie.client');
 
 var _cookie2 = _interopRequireDefault(_cookie);
 
+var _reply = require('./reply.client');
+
+var _reply2 = _interopRequireDefault(_reply);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -88,7 +92,11 @@ var Application = function () {
         });
 
         var request = function request() {};
-        var reply = function reply() {};
+        var reply = (0, _reply2.default)(this);
+
+        if (push) {
+          history.pushState({}, null, url);
+        }
 
         controller.index(this, request, reply, function (err) {
           if (err) {
@@ -104,10 +112,6 @@ var Application = function () {
             reply(response);
           });
         });
-      }
-
-      if (push) {
-        history.pushState({}, null, url);
       }
     }
   }, {
