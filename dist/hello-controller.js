@@ -40,6 +40,10 @@ function getName(request) {
   return name;
 };
 
+function onClick(e) {
+  console.log(e.currentTarget);
+}
+
 var HelloController = function (_Controller) {
   _inherits(HelloController, _Controller);
 
@@ -50,15 +54,33 @@ var HelloController = function (_Controller) {
   }
 
   _createClass(HelloController, [{
+    key: 'attach',
+    value: function attach(el) {
+      console.log(this.context.data.random);
+      this.clickHandler = el.addEventListener('click', onClick, false);
+    }
+  }, {
+    key: 'detach',
+    value: function detach(el) {
+      el.removeEventListener('click', onClick, false);
+    }
+  }, {
     key: 'index',
     value: function index(application, request, reply, callback) {
       this.context.cookie.set('random', '_' + (Math.floor(Math.random() * 1000) + 1), { path: '/' });
+
+      this.context.data = { random: Math.floor(Math.random() * 1000) + 1 };
+
       callback(null);
     }
   }, {
     key: 'toString',
     value: function toString(callback) {
       console.info("@hello-controller.js in HelloController Class toString");
+
+      var context = getName(this.context);
+      context.data = this.context.data;
+
       return _nunjucks2.default.render('hello.html', getName(this.context), function (err, html) {
         if (err) {
           return callback(err, null);

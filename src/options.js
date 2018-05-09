@@ -43,7 +43,6 @@ server.route({
 });
 
 export default {
-  // nunjucks: './dist',
   nunjucks: {
     path: './dist',
     options: {
@@ -56,7 +55,8 @@ export default {
       './index.html',
       {
         body: body,
-        application: APP_FILE_PATH
+        application: APP_FILE_PATH,
+        state: controller.serialize()
       },
       (err, html) => {
         if(err){

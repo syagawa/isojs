@@ -55,6 +55,47 @@ var Application = function () {
       }
     }
   }, {
+    key: 'createController',
+    value: function createController(url) {
+
+      var urlParts = url.split('?');
+
+      var _urlParts = _slicedToArray(urlParts, 2),
+          path = _urlParts[0],
+          search = _urlParts[1];
+
+      var match = this.router.route('get', path);
+      var route = match.route,
+          params = match.params;
+
+      var Controller = this.routes[route];
+
+      return Controller ? new Controller({
+        query: _queryString2.default.parse(search),
+        params: params,
+        cookie: _cookie2.default
+      }) : undefined;
+    }
+  }, {
+    key: 'getUrl',
+    value: function getUrl() {
+      var _window$location = window.location,
+          pathname = _window$location.pathname,
+          search = _window$location.search;
+
+      return '' + pathname + search;
+    }
+  }, {
+    key: 'rehydrate',
+    value: function rehydrate() {
+      var targetEl = document.querySelector(this.options.target);
+
+      this.controller = this.createController(this.getUrl());
+      this.controller.deserialize();
+
+      this.controller.attach(targetEl);
+    }
+  }, {
     key: 'navigate',
     value: function navigate(url) {
       var _this = this;
@@ -69,27 +110,10 @@ var Application = function () {
         return;
       }
 
-      var urlParts = url.split('?');
+      var previousController = this.controller;
+      this.controller = this.createController(url);
 
-      var _urlParts = _slicedToArray(urlParts, 2),
-          path = _urlParts[0],
-          search = _urlParts[1];
-
-      var match = this.router.route('get', path);
-      var route = match.route,
-          params = match.params;
-
-      var Controller = this.routes[route];
-
-      if (route && Controller) {
-        console.log(match);
-        console.log(Controller);
-
-        var controller = new Controller({
-          query: _queryString2.default.parse(search),
-          params: params,
-          cookie: _cookie2.default
-        });
+      if (this.controller) {
 
         var request = function request() {};
         var reply = (0, _reply2.default)(this);
@@ -98,18 +122,27 @@ var Application = function () {
           history.pushState({}, null, url);
         }
 
-        controller.index(this, request, reply, function (err) {
+        this.controller.index(this, request, reply, function (err) {
           if (err) {
             return reply(err);
           }
 
           console.info("@lib/index.client.js Application Class navigate controller.index");
-          controller.render(_this.options.target, function (err, response) {
+
+          var targetEl = document.querySelector(_this.options.target);
+
+          if (previousController) {
+            previousController.detach(targetEl);
+          }
+
+          _this.controller.render(_this.options.target, function (err, response) {
             if (err) {
               return reply(err);
             }
 
             reply(response);
+
+            _this.controller.attach(targetEl);
           });
         });
       }
@@ -121,9 +154,9 @@ var Application = function () {
 
       console.info("@lib/index.client.js Application Class start");
       this.poStateListener = window.addEventListener('popstate', function (e) {
-        var _window$location = window.location,
-            pathname = _window$location.pathname,
-            search = _window$location.search;
+        var _window$location2 = window.location,
+            pathname = _window$location2.pathname,
+            search = _window$location2.search;
 
         var url = '' + pathname + search;
         _this2.navigate(url, false);
@@ -144,6 +177,8 @@ var Application = function () {
           _this2.navigate(identifier || href);
         }
       });
+
+      this.rehydrate();
     }
   }]);
 

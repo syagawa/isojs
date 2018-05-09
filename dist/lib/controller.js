@@ -45,6 +45,26 @@ var Controller = function () {
         callback(null, body);
       });
     }
+  }, {
+    key: "serialize",
+    value: function serialize() {
+      return JSON.stringify(this.context.data || {});
+    }
+  }, {
+    key: "deserialize",
+    value: function deserialize() {
+      this.context.data = JSON.parse(window.__STATE__);
+    }
+  }, {
+    key: "attach",
+    value: function attach(el) {
+      // to be implemented by the application
+    }
+  }, {
+    key: "detach",
+    value: function detach(el) {
+      // to be implemented by the application
+    }
   }]);
 
   return Controller;

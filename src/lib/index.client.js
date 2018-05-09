@@ -27,6 +27,37 @@ export default class Application {
     }
   }
 
+  createController(url){
+
+    let urlParts = url.split('?');
+    let [path, search] = urlParts;
+    let match = this.router.route('get', path);
+    let {route, params} = match;
+    let Controller = this.routes[route];
+
+    return Controller ?
+      new Controller({
+        query: query.parse(search),
+        params: params,
+        cookie: cookie
+      }) : undefined;
+
+  }
+
+  getUrl(){
+    let { pathname, search } = window.location;
+    return `${pathname}${search}`;
+  }
+
+  rehydrate(){
+    let targetEl = document.querySelector(this.options.target);
+
+    this.controller = this.createController(this.getUrl());
+    this.controller.deserialize();
+
+    this.controller.attach(targetEl);
+  }
+
   navigate(url, push=true){
 
     console.info("@lib/index.client.js Application Class navigate");
@@ -36,21 +67,10 @@ export default class Application {
       return;
     }
 
-    let urlParts = url.split('?');
-    let [path, search] = urlParts;
-    let match = this.router.route('get', path);
-    let {route, params} = match;
-    let Controller = this.routes[route];
+    let previousController = this.controller;
+    this.controller = this.createController(url);
 
-    if(route && Controller){
-      console.log(match);
-      console.log(Controller);
-
-      const controller = new Controller({
-        query: query.parse(search),
-        params: params,
-        cookie: cookie
-      });
+    if(this.controller){
 
       const request = () => {};
       const reply = replyFactory(this);
@@ -59,18 +79,27 @@ export default class Application {
         history.pushState({}, null, url);
       }
 
-      controller.index(this, request, reply, (err) => {
+      this.controller.index(this, request, reply, (err) => {
         if(err){
           return reply(err);
         }
 
         console.info("@lib/index.client.js Application Class navigate controller.index");
-        controller.render(this.options.target, (err, response) => {
+
+        let targetEl = document.querySelector(this.options.target);
+
+        if(previousController){
+          previousController.detach(targetEl);
+        }
+
+        this.controller.render(this.options.target, (err, response) => {
           if(err){
             return reply(err);
           }
 
           reply(response);
+
+          this.controller.attach(targetEl);
 
         })
 
@@ -103,6 +132,9 @@ export default class Application {
         this.navigate( identifier || href);
       }
     });
+
+    this.rehydrate();
+
   }
 
 

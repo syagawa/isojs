@@ -60,7 +60,6 @@ server.route({
 });
 
 exports.default = {
-  // nunjucks: './dist',
   nunjucks: {
     path: './dist',
     options: {
@@ -71,7 +70,8 @@ exports.default = {
   document: function document(application, controller, request, reply, body, callback) {
     return _nunjucks2.default.render('./index.html', {
       body: body,
-      application: APP_FILE_PATH
+      application: APP_FILE_PATH,
+      state: controller.serialize()
     }, function (err, html) {
       if (err) {
         return callback(err, null);
