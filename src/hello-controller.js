@@ -42,6 +42,8 @@ export default class HelloController extends Controller {
 
     this.context.data = { random: Math.floor( Math.random() * 1000 ) + 1 };
 
+    console.info(this.context.data);
+
     callback(null);
   }
 
@@ -53,7 +55,7 @@ export default class HelloController extends Controller {
 
     return nunjucks.render(
       'hello.html',
-      getName(this.context),
+      context,
       (err, html) => {
         if(err){
           return callback(err, null);

@@ -71,6 +71,8 @@ var HelloController = function (_Controller) {
 
       this.context.data = { random: Math.floor(Math.random() * 1000) + 1 };
 
+      console.info(this.context.data);
+
       callback(null);
     }
   }, {
@@ -81,7 +83,7 @@ var HelloController = function (_Controller) {
       var context = getName(this.context);
       context.data = this.context.data;
 
-      return _nunjucks2.default.render('hello.html', getName(this.context), function (err, html) {
+      return _nunjucks2.default.render('hello.html', context, function (err, html) {
         if (err) {
           return callback(err, null);
         }
